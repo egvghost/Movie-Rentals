@@ -10,13 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_18_202654) do
+ActiveRecord::Schema.define(version: 2019_04_18_204532) do
 
   create_table "genres", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_genres_on_name", unique: true
+  end
+
+  create_table "movies", force: :cascade do |t|
+    t.string "name"
+    t.string "movie_url"
+    t.datetime "year"
+    t.string "parental_guidante_rate"
+    t.string "cover_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
