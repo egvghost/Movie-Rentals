@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  movie_url: MyString
+  year: 2019-04-18 17:45:32
+  parental_guidante_rate: MyString
+  cover_url: MyString
+
+two:
+  name: MyString
+  movie_url: MyString
+  year: 2019-04-18 17:45:32
+  parental_guidante_rate: MyString
+  cover_url: MyString
