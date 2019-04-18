@@ -36,6 +36,11 @@
     <%= form.text_field :cover_url %>
   </div>
 
+  <div class="field">
+    <%= form.label :genre %>
+    <%= form.collection_select(:genre_id, @genres, :id, :name) %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
