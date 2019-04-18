@@ -2,7 +2,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
   def change
     create_table :users do |t|
       t.string :name
-      t.string :email
+      t.string :email, null: false #El 'null: false' impide que se guarden en la base usuarios sin email
       t.datetime :birthdate
 
       t.timestamps

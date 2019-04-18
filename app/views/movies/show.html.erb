@@ -11,18 +11,18 @@
 </p>
 
 <p>
-  <strong>Year:</strong>
-  <%= @movie.year %>
+  <strong>Release Date:</strong>
+  <%= @movie.release_date %>
 </p>
 
 <p>
-  <strong>Parental guidante rate:</strong>
-  <%= @movie.parental_guidante_rate %>
+  <strong>Rating:</strong>
+  <%= @movie.rating %>
 </p>
 
 <p>
   <strong>Cover url:</strong>
-  <%= @movie.cover_url %>
+  <img class="card-img-left" src= "<%= @movie.cover_url %>"/>
 </p>
 
 <%= link_to 'Edit', edit_movie_path(@movie) %> |
