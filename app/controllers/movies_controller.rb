@@ -15,6 +15,7 @@ class MoviesController < ApplicationController
   # GET /movies/new
   def new
     @movie = Movie.new
+    @genres = Genre.all
   end
 
   # GET /movies/1/edit
