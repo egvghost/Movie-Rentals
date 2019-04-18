@@ -6,7 +6,7 @@ class CreateMovies < ActiveRecord::Migration[5.2]
       t.datetime :year
       t.string :parental_guidante_rate
       t.string :cover_url
-
+      t.belongs_to :genre
       t.timestamps
     end
   end
