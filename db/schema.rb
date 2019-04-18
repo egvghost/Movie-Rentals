@@ -23,10 +23,12 @@ ActiveRecord::Schema.define(version: 2019_04_18_204532) do
     t.string "name"
     t.string "movie_url"
     t.datetime "year"
-    t.string "parental_guidante_rate"
+    t.string "rating"
     t.string "cover_url"
+    t.integer "genre_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["genre_id"], name: "index_movies_on_genre_id"
   end
 
   create_table "users", force: :cascade do |t|
