@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2019_04_18_223903) do
   create_table "movies", force: :cascade do |t|
     t.string "name"
     t.string "movie_url"
-    t.date "release_date"
+    t.datetime "year"
     t.string "rating"
     t.string "cover_url"
     t.integer "genre_id"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2019_04_18_223903) do
 
   create_table "users", force: :cascade do |t|
     t.string "name"
-    t.string "email"
+    t.string "email", null: false
     t.datetime "birthdate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
