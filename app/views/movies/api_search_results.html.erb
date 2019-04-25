@@ -1,0 +1,23 @@
+<h1>TMDB API Search Results</h1>
+
+<%= form_with url: import_movies_path, local: true do |form| %>
+<table>
+  <thead>
+    <tr>
+      <th colspan="1"></th>
+      <th>Name</th>
+      <th>Release Date</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @results.each do |result| %>
+    <tr>
+      <td><%= radio_button_tag(:tmdb_id, result["id"]) %></td>
+      <td><%= result["title"] %></td>
+      <td><%= result["release_date"] %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<%= form.submit :Import %>
+<% end %>

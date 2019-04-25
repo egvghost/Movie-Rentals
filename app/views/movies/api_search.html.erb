@@ -1,0 +1,11 @@
+<%= form_with url: api_search_results_movies_path, local: true, method: :get do |form| %>
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+  <div class="field">
+    <%= form.label :release_year %>
+    <%= form.text_field :release_year %>
+  </div>
+  <%= form.submit :Search %>
+<% end %>

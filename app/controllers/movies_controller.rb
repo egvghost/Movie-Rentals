@@ -7,6 +7,41 @@ class MoviesController < ApplicationController
     @movies = Movie.all
   end
 
+  def api_search
+  end
+
+  def api_search_results
+    movie_name = params["name"] if params["name"] != "" #o unless params["name"].blank?
+    release_year = params["release_year"] unless params["name"].blank?
+    search = Tmdb::Search.new
+    search.resource 'movie' # ----> search.resource('movie')
+    search.year release_year
+    search.query movie_name
+    @results = search.fetch
+  end
+
+  def import
+    tmdb_id = params["tmdb_id"]
+    tmdb_movie = Tmdb::Movie.detail(tmdb_id)
+    tmdb_movie_genre = tmdb_movie["genres"].first["name"]
+    tmdb_movie_rating = Tmdb::Movie.releases(tmdb_id)
+    movie_genre = Genre.first_or_create(name: tmdb_movie_genre)
+
+    @movie = Movie.new
+    @movie.name = tmdb_movie["title"]
+    @movie.genre = movie_genre
+    @movie.release_date = tmdb_movie["releaase_date"]
+    @movie.cover_url = "https://image.tmdb.org/t/p/w600_and_h900_bestv2/#{tmdb_movie["poster_path"]}"
+    @movie.rating = tmdb_movie_rating["countries"].find{|c| c["iso_3166_1"] == "US"}["certification"]
+
+    if @movie.save #si la puede crear devuelve el objeto, sino 'false'. El if evalua por false/true
+      redirect_to @movie, notice: "Movie was successfully created"
+    else
+      redirect_to import_error_movies_path
+    end
+
+  end
+
   # GET /movies/1
   # GET /movies/1.json
   def show
