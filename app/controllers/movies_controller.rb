@@ -25,7 +25,7 @@ class MoviesController < ApplicationController
     tmdb_movie = Tmdb::Movie.detail(tmdb_id)
     tmdb_movie_genre = tmdb_movie["genres"].first["name"]
     tmdb_movie_rating = Tmdb::Movie.releases(tmdb_id)
-    movie_genre = Genre.first_or_create(name: tmdb_movie_genre)
+    movie_genre = Genre.find_or_create_by(name: tmdb_movie_genre)
 
     @movie = Movie.new
     @movie.name = tmdb_movie["title"]
