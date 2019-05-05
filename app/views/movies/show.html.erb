@@ -6,9 +6,41 @@
 </p>
 
 <p>
+  <strong>Cover url:</strong><br>
+  <img class="card-img-left" src= "<%= @movie.cover_url %>"/>
+</p>
+
+<p>
   <strong>Genre:</strong>
   <%= @movie.genre.name %>
 </p>
+
+<p>
+  <strong>Cast:</strong><br>
+</p>
+  <% @movie.movie_artists.where(role: 'Cast').each do |ma| %>
+<ul>
+<li>  <%= ma.artist.name%> </li>
+</ul>
+<% end %>
+
+<p>
+  <strong>Director:</strong><br>
+</p>
+  <% @movie.movie_artists.where(role: 'Director').each do |ma| %>
+<ul>
+<li>  <%= ma.artist.name%> </li>
+</ul>
+<% end %>
+
+<p>
+  <strong>Producer:</strong><br>
+</p>
+  <% @movie.movie_artists.where(role: 'Producer').each do |ma| %>
+<ul>
+<li>  <%= ma.artist.name%> </li>
+</ul>
+<% end %>
 
 <p>
   <strong>Movie url:</strong>
@@ -23,11 +55,6 @@
 <p>
   <strong>Rating:</strong>
   <%= @movie.rating %>
-</p>
-
-<p>
-  <strong>Cover url:</strong>
-  <img class="card-img-left" src= "<%= @movie.cover_url %>"/>
 </p>
 
 <%= link_to 'Edit', edit_movie_path(@movie) %> |

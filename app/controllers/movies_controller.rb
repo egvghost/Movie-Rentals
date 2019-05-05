@@ -12,7 +12,7 @@ class MoviesController < ApplicationController
 
   def api_search_results
     movie_name = params["name"] if params["name"] != "" #o unless params["name"].blank?
-    release_year = params["release_year"] unless params["name"].blank?
+    release_year = params["release_year"] unless params["release_year"].blank?
     search = Tmdb::Search.new
     search.resource 'movie' # ----> search.resource('movie')
     search.year release_year
@@ -21,7 +21,7 @@ class MoviesController < ApplicationController
   end
 
   def import
-    tmdb_id = params["tmdb_id"]
+    tmdb_id = params["tmdb_id"] if params["tmdb_id"] != ""
     tmdb_movie = Tmdb::Movie.detail(tmdb_id)
     tmdb_movie_genre = tmdb_movie["genres"].first["name"]
     tmdb_movie_rating = Tmdb::Movie.releases(tmdb_id)
@@ -30,8 +30,8 @@ class MoviesController < ApplicationController
     @movie = Movie.new
     @movie.name = tmdb_movie["title"]
     @movie.genre = movie_genre
-    @movie.release_date = tmdb_movie["releaase_date"]
-    @movie.cover_url = "https://image.tmdb.org/t/p/w600_and_h900_bestv2/#{tmdb_movie["poster_path"]}"
+    @movie.release_date = tmdb_movie["release_date"]
+    @movie.cover_url = "https://image.tmdb.org/t/p/w400/#{tmdb_movie["poster_path"]}"
     @movie.rating = tmdb_movie_rating["countries"].find{|c| c["iso_3166_1"] == "US"}["certification"]
 
     if @movie.save #si la puede crear devuelve el objeto, sino 'false'. El if evalua por false/true
