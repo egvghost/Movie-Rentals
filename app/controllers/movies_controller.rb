@@ -37,7 +37,7 @@ class MoviesController < ApplicationController
     if @movie.save #si la puede crear devuelve el objeto, sino 'false'. El if evalua por false/true
       redirect_to @movie, notice: "Movie was successfully created"
     else
-      redirect_to import_error_movies_path
+      redirect_to import_error_movies_path, notice: "Movie could not be created (#{@movie.errors.messages})"
     end
 
   end
