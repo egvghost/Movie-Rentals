@@ -22,19 +22,8 @@ class MoviesController < ApplicationController
 
   def import
     tmdb_id = params["tmdb_id"] if params["tmdb_id"] != ""
-    tmdb_movie = Tmdb::Movie.detail(tmdb_id)
-    tmdb_movie_genre = tmdb_movie["genres"].first["name"]
-    tmdb_movie_rating = Tmdb::Movie.releases(tmdb_id)
-    movie_genre = Genre.find_or_create_by(name: tmdb_movie_genre)
-
-    @movie = Movie.new
-    @movie.name = tmdb_movie["title"]
-    @movie.genre = movie_genre
-    @movie.release_date = tmdb_movie["release_date"]
-    @movie.cover_url = "https://image.tmdb.org/t/p/w400/#{tmdb_movie["poster_path"]}"
-    @movie.rating = tmdb_movie_rating["countries"].find{|c| c["iso_3166_1"] == "US"}["certification"]
-
-    if @movie.save #si la puede crear devuelve el objeto, sino 'false'. El if evalua por false/true
+    @movie = Movie.import_movie_from_tmdb(tmdb_id)
+    if @movie #si la puede crear devuelve 'true', sino 'false'. El if evalua por false/true
       redirect_to @movie, notice: "Movie was successfully created"
     else
       redirect_to import_error_movies_path, notice: "Movie could not be created (#{@movie.errors.messages})"
