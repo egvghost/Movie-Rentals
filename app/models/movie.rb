@@ -25,10 +25,16 @@ class Movie < ApplicationRecord
   private
 
   def self.import_directors_from_tmdb(credits, m)
+    crew = {}
     #byebug
-    director = credits["crew"].find{|c| c["job"] == "Director"}.select{|k,v| k == "name"}   
-    artist = Artist.find_or_create_by(name: director["name"])
-    MovieArtist.find_or_create_by(role: "Director",movie: m, artist: artist) 
+    for i in 0..credits["crew"].size-1
+      if credits["crew"][i]["job"] == "Director" then 
+        crew[i] = credits["crew"][i]["name"] 
+        director = credits["crew"].find{|c| c["job"] == "Director"}.select{|k,v| k == "name"}   
+        artist = Artist.find_or_create_by(name: crew[i])
+        MovieArtist.find_or_create_by(role: "Director",movie: m, artist: artist) 
+      end
+    end
   end
 
   def self.import_producers_from_tmdb(credits, m)
