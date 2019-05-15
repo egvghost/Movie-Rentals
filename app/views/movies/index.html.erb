@@ -1,36 +1,52 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Movies</h1>
+<div class="card">
+  <h5 class="card-header"><b>Movies</b></h5>
+  <div class="card-body">
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Movie url</th>
-      <th>Release Date</th>
-      <th>Rating</th>
-      <th>Cover url</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th></th>
+        </tr>
+      </thead>
 
-  <tbody>
-    <% @movies.each do |movie| %>
-      <tr>
-        <td><%= movie.name %></td>
-        <td><%= movie.movie_url %></td>
-        <td><%= movie.release_date %></td>
-        <td><%= movie.rating %></td>
-        <td><%= movie.cover_url %></td>
-        <td><%= link_to 'Show', movie %></td>
-        <td><%= link_to 'Edit', edit_movie_path(movie) %></td>
-        <td><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <tbody>
+        <% @movies.each do |movie| %>
+          <tr>
+          <td>
+          <div class="row">
+            <div class="col">
+              <img src= "<%= movie.cover_url %>" style="max-width:25%;"/>
+            </div>
+            <div class="col">
+              <h5><b><%= movie.name %></b><h5>
+            </div>
+            <div class="col">
+              <ul>
+                <li>Release Date: <%= movie.release_date %></li>
+                <li>Rating: <%= movie.rating %></li>
+                <li>Genre: <%= movie.genre.name %></li>
+                <li>Movie URL: <%= movie.movie_url %></li>
+              </ul>
+            </div>
+            <div class="col">
+              <ul>
+                <li><%= link_to 'Show', movie %></li>
+                <li><%= link_to 'Edit', edit_movie_path(movie) %></li>
+                <li><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+              </ul>
+            </div>
+          </div>
+          </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
-<br>
+    <br>
 
-<%= link_to 'New Movie', new_movie_path %>
-<%= link_to 'Search Movie using TMDB API', api_search_movies_path %>
+    <%= link_to 'New Movie', new_movie_path %>
+    <%= link_to 'Search Movie using TMDB API', api_search_movies_path %>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="header clearfix">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#" style="font-size:14px">Movie Rental App</a>
+    <ul class="nav nav-tabs float-right mb-1">
+      <li class="nav-item">
+      <% if @home_selected_in_nav %>
+        <a class="nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+      <% else %>
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      <% end %>
+      </li>
+      <li class="nav-item">
+      <% if @movies_selected_in_nav %>
+        <a class="nav-link active" href="/movies">Movies <span class="sr-only">(current)</span></a>
+      <% else %>
+        <a class="nav-link" href="/movies">Movies <span class="sr-only">(current)</span></a>
+      <% end %>
+      </li>
+      <li class="nav-item">
+        <% if @contact_obra_selected_in_nav %>
+          <a class="nav-link active" href="/contact" role="button">Contact</a>
+        <% else %>
+          <a class="nav-link" href="/contact" role="button">Contact</a>
+        <% end %>
+      </li>
+    </ul>
+  </nav>
+</div>

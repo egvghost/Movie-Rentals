@@ -23,6 +23,7 @@ class Movie < ApplicationRecord
     self.import_cast_from_tmdb movie_credits, movie
     movie
   end
+  
 
   private
 
