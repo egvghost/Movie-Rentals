@@ -3,10 +3,12 @@
 <div class="card">
   <h5 class="card-header"><b>Movies</b></h5>
   <div class="card-body">
-
     <table class="table table-striped">
       <thead>
         <tr>
+          <th width="10%"></th>
+          <th width="30%"></th>
+          <th></th>
           <th></th>
         </tr>
       </thead>
@@ -14,31 +16,21 @@
       <tbody>
         <% @movies.each do |movie| %>
           <tr>
-          <td>
-          <div class="row">
-            <div class="col">
-              <img src= "<%= movie.cover_url %>" style="max-width:25%;"/>
-            </div>
-            <div class="col">
-              <h5><b><%= movie.name %></b><h5>
-            </div>
-            <div class="col">
+            <td><img class="card-img-left" src= "<%= movie.cover_url %>" style="max-width:70%;"/></td>
+            <td style="vertical-align:middle"><h5><b><%= movie.name %></b><h5></td>
+            <td style="vertical-align:middle">
               <ul>
                 <li>Release Date: <%= movie.release_date %></li>
                 <li>Rating: <%= movie.rating %></li>
                 <li>Genre: <%= movie.genre.name %></li>
                 <li>Movie URL: <%= movie.movie_url %></li>
               </ul>
-            </div>
-            <div class="col">
-              <ul>
-                <li><%= link_to 'Show', movie %></li>
-                <li><%= link_to 'Edit', edit_movie_path(movie) %></li>
-                <li><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' } %></li>
-              </ul>
-            </div>
-          </div>
-          </td>
+            </td>
+            <td style="vertical-align:middle">
+              <%= link_to 'Show', movie %> | 
+              <%= link_to 'Edit', edit_movie_path(movie) %> | 
+              <%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' } %>
+            </td>
           </tr>
         <% end %>
       </tbody>

@@ -1,61 +1,46 @@
 <p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="card" style="width:25%">
+    <img src="<%= @movie.cover_url %>" style="width:100%">
+  </div> 
+  <div class="col-md-1">
+  </div>
+  <div class="card" style="width:400px">
+    <div class="container">
+      <strong>Movie name: </strong><%= @movie.name %><br><br>
+      <strong>Movie url: </strong><%= @movie.movie_url %><br><br>
+      <strong>Release Date: </strong><%= @movie.release_date %><br><br>
+      <strong>Rating: </strong><%= @movie.rating %><br><br>
+      <strong>Genre: </strong><%= @movie.genre.name %><br><br>
+      <strong>Directors: </strong><br>
+        <% @movie.movie_artists.where(role: 'Director').each do |ma| %>
+        <ul>
+          <li>  <%= ma.artist.name%> </li>
+        </ul>
+        <% end %>
+      <strong>Producers: </strong><br>
+        <% @movie.movie_artists.where(role: 'Producer').each do |ma| %>
+        <ul>
+          <li>  <%= ma.artist.name%> </li>
+        </ul>
+        <% end %>
+    </div>
+  </div>
+  <div class="col-md-1">
+  </div>
+  <div class="card" style="width:400px">
+    <div class="container">
+      <strong>Cast:</strong><br>
+        <% @movie.movie_artists.where(role: 'Cast').take(12).each do |ma| %>
+        <ul>
+          <li>  <%= ma.artist.name%> </li>
+        </ul>
+        <% end %>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @movie.name %>
-</p>
-
-<p>
-  <strong>Movie url:</strong>
-  <%= @movie.movie_url %>
-</p>
-
-<p>
-  <strong>Release Date:</strong>
-  <%= @movie.release_date %>
-</p>
-
-<p>
-  <strong>Rating:</strong>
-  <%= @movie.rating %>
-</p>
-
-<p>
-  <strong>Genre:</strong>
-  <%= @movie.genre.name %>
-</p>
-
-<p>
-  <strong>Cover url:</strong><br>
-  <img class="card-img-left" src= "<%= @movie.cover_url %>"/>
-</p>
-
-<p>
-  <strong>Directors:</strong><br>
-</p>
-  <% @movie.movie_artists.where(role: 'Director').each do |ma| %>
-<ul>
-<li>  <%= ma.artist.name%> </li>
-</ul>
-<% end %>
-
-<p>
-  <strong>Producers:</strong><br>
-</p>
-  <% @movie.movie_artists.where(role: 'Producer').each do |ma| %>
-<ul>
-<li>  <%= ma.artist.name%> </li>
-</ul>
-<% end %>
-
-<p>
-  <strong>Cast:</strong><br>
-</p>
-  <% @movie.movie_artists.where(role: 'Cast').each do |ma| %>
-<ul>
-<li>  <%= ma.artist.name%> </li>
-</ul>
-<% end %>
-
-<%= link_to 'Edit', edit_movie_path(@movie) %> |
-<%= link_to 'Back', movies_path %>
+<br>
+<%= link_to 'Back', movies_path %> | 
+<%= link_to 'Edit', edit_movie_path(@movie) %> | 
+<%= link_to 'Destroy', @movie, method: :delete, data: { confirm: 'Are you sure?' } %>
