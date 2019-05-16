@@ -10,13 +10,14 @@
             <img src="<%= movie.cover_url %>" style="width:100%">
           </div>
           <div class="flip-card-back">
-            <ul>
-              <li>Movie name: <%= movie.name %></li>
-              <li>Release Date: <%= movie.release_date %></li>
-              <li>Rating: <%= movie.rating %></li>
-              <li>Genre: <%= movie.genre.name %></li>
-              <li>Movie URL: <%= movie.movie_url %></li>
-            </ul>
+            <font size="1.5">
+              <p><strong>Movie name: </strong><%= movie.name %></p>
+              <p><strong>Release Date: </strong><%= movie.release_date %></p>
+              <p><strong>Rating: </strong><%= movie.rating %></p>
+              <p><strong>Genre: </strong><%= movie.genre.name %></p>
+              <p><strong>Movie URL: </strong><%= movie.movie_url %></p>
+            </font>
+            <%= link_to 'Show', movie %>
           </div>
         </div>
       </div> 
