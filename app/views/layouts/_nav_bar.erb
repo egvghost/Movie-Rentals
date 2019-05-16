@@ -11,9 +11,16 @@
       </li>
       <li class="nav-item">
       <% if @movies_selected_in_nav %>
-        <a class="nav-link active" href="/movies">Movies <span class="sr-only">(current)</span></a>
+        <a class="nav-link active" href="/movies" role="button">Movies</a>
       <% else %>
-        <a class="nav-link" href="/movies">Movies <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/movies" role="button">Movies</a>
+      <% end %>
+      </li>
+      <li class="nav-item">
+      <% if @genres_selected_in_nav %>
+        <a class="nav-link active" href="/genres" role="button">Genres</a>
+      <% else %>
+        <a class="nav-link" href="/genres" role="button">Genres</a>
       <% end %>
       </li>
       <li class="nav-item">
