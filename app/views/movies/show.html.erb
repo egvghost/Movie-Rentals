@@ -1,43 +1,39 @@
 <p id="notice"><%= notice %></p>
 <div class="row">
-  <div class="card" style="width:25%">
+  <div class="card" style="width:27%">
     <img src="<%= @movie.cover_url %>" style="width:100%">
   </div> 
   <div class="col-md-1">
   </div>
-  <div class="card" style="width:400px">
-    <div class="container">
-      <strong>Movie name: </strong><%= @movie.name %><br><br>
-      <strong>Movie url: </strong><%= @movie.movie_url %><br><br>
-      <strong>Release Date: </strong><%= @movie.release_date %><br><br>
-      <strong>Rating: </strong><%= @movie.rating %><br><br>
+  <div class="card" style="width:300px"><font size="2">
+    <div class="container"><br>
+      <strong>Movie name: </strong><%= @movie.name %><br>
+      <strong>Movie url: </strong><%= @movie.movie_url %><br>
+      <strong>Release Date: </strong><%= @movie.release_date %><br>
+      <strong>Rating: </strong><%= @movie.rating %><br>
       <strong>Genre: </strong><%= @movie.genre.name %><br><br>
       <strong>Directors: </strong><br>
         <% @movie.movie_artists.where(role: 'Director').each do |ma| %>
-        <ul>
-          <li>  <%= ma.artist.name%> </li>
-        </ul>
-        <% end %>
+          <%= ma.artist.name%><br>
+        <% end %><br>
       <strong>Producers: </strong><br>
-        <% @movie.movie_artists.where(role: 'Producer').each do |ma| %>
-        <ul>
-          <li>  <%= ma.artist.name%> </li>
-        </ul>
+        <% @movie.movie_artists.where(role: 'Producer').take(5).each do |ma| %>
+          <%= ma.artist.name%><br>
+        <% end %><br>
+      <strong>Cast:</strong><br>
+        <% @movie.movie_artists.where(role: 'Cast').take(10).each do |ma| %>
+          <%= ma.artist.name%><br>
         <% end %>
-    </div>
+    </div></font>
   </div>
   <div class="col-md-1">
   </div>
-  <div class="card" style="width:400px">
-    <div class="container">
-      <strong>Cast:</strong><br>
-        <% @movie.movie_artists.where(role: 'Cast').take(12).each do |ma| %>
-        <ul>
-          <li>  <%= ma.artist.name%> </li>
-        </ul>
-        <% end %>
+  <div class="card" style="width:450px"><font size="2">
+    <div class="container"><br>
+      <strong>Overview:</strong><br>
+        <%= @movie.overview %><br>
     </div>
-  </div>
+  </div></font>
 </div>
 
 <br>

@@ -12,6 +12,7 @@ class Movie < ApplicationRecord
     movie_credits = Tmdb::Movie.credits(tmdb_id) 
     movie = self.new
     movie.name = tmdb_movie["title"]
+    movie.overview = tmdb_movie["overview"]
     movie.genre = movie_genre
     movie.release_date = tmdb_movie["release_date"]
     movie.cover_url = "https://image.tmdb.org/t/p/w400/#{tmdb_movie["poster_path"]}"

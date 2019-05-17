@@ -24,7 +24,7 @@ class MoviesController < ApplicationController
     tmdb_id = params["tmdb_id"] if params["tmdb_id"] != ""
     @movie = Movie.import_movie_from_tmdb(tmdb_id)
     if @movie #si la puede crear devuelve 'true', sino 'false'. El if evalua por false/true
-      redirect_to @movie, notice: "Movie was successfully created (#{@movie.errors.messages})"
+      redirect_to @movie, notice: "Movie was successfully created"
     else
       redirect_to import_error_movies_path, notice: "Movie could not be created (#{@movie.errors.messages})"
     end
