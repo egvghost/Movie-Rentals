@@ -11,12 +11,10 @@
 
   <body>
     <%= render "layouts/nav_bar" %>
-    <div class="card">
-      <div class="card-body">
-      <%= yield %>
-      <br>
-      <%= render "layouts/footer" %>
-      </div>
+    <font style="color:LightBlue;">
+    <%= yield %>
+    </font><br>
+    <%= render "layouts/footer" %>
     </div> <!-- /container -->
   </body>
 </html>

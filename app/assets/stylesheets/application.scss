@@ -16,6 +16,13 @@
  
 @import "bootstrap";
 
+body {
+  background-image: url("filmstrip-background");
+  background-color: #40698f;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .vertical-center {
   margin: 0;
   position: absolute;
@@ -49,9 +56,10 @@ img {
  /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
  .flip-card {
   background-color: transparent;
-  width: 170px;
-  height: 253px;
-  border: 2px solid #ffffff;
+  width: 162px;
+  height: 241px;
+  border: 3px solid;
+  border-color: transparent;
   //perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }
 
@@ -80,7 +88,7 @@ img {
 
 /* Style the front side (fallback if image is missing) */
 .flip-card-front {
-  background-color: #bbb;
+  background-color: transparent;
   color: black;
 }
 
@@ -88,8 +96,9 @@ img {
 .flip-card-back {
   background-color: rgb(53, 98, 143);
   color: rgb(188, 216, 243);
-  width: 168px;
-  height: 253px;
-  border: 2px solid #ffffff;
+  width: 160px;
+  height: 238px;
+  border: 2px solid;
+  border-color: transparent;
   transform: rotateY(180deg);
 } 

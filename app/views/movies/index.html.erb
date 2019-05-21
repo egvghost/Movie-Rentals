@@ -1,13 +1,12 @@
 <p id="notice"><%= notice %></p>
-<div class="card">
-  <h5 class="card-header"><b>Available Movies</b></h5>
-  <div class="card-body">
-    <div class="row">
+<h5 class="container" style="background-color: #bce5ff; border:2px solid DarkBlue; color:DarkBlue;"><b>Available Movies</b></h5>
+<div class="container">
+  <div class="row">
     <% @movies.each do |movie| %>
       <div class="flip-card">
         <div class="flip-card-inner">
           <div class="flip-card-front">
-            <img src="<%= movie.cover_url %>" style="width:100%">
+            <img src="<%= movie.cover_url %>" class="img-fluid" alt="Responsive image">
           </div>
           <div class="flip-card-back">
             <font size="1.5"><br>
@@ -21,8 +20,7 @@
         </div>
       </div>
     <% end %>
-    </div><br>
-    <%= link_to 'New Movie', new_movie_path %>
-    <%= link_to 'Search Movie using TMDB API', api_search_movies_path %>
-  </div>
+  </div><br>
+  <%= link_to 'New Movie', new_movie_path %>
+  <%= link_to 'Search Movie using TMDB API', api_search_movies_path %>
 </div>
