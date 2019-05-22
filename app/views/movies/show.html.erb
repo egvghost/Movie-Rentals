@@ -1,42 +1,61 @@
 <p id="notice"><%= notice %></p>
-<div class="row">
-  <div class="card" style="width:27%">
-    <img src="<%= @movie.cover_url %>" style="width:100%">
-  </div> 
-  <div class="col-md-1">
+<div class="row" style="align-items:center">
+  <div class="col-4"> 
+    <div class="card" style="width:75%">
+      <img src="<%= @movie.cover_url %>" style="width:100%">
+    </div> 
   </div>
-  <div class="card" style="width:300px"><font size="2">
-    <div class="container"><br>
-      <strong>Movie name: </strong><%= @movie.name %><br>
-      <strong>Movie url: </strong><%= @movie.movie_url %><br>
-      <strong>Release Date: </strong><%= @movie.release_date %><br>
-      <strong>Rating: </strong><%= @movie.rating %><br>
-      <strong>Genre: </strong><%= @movie.genre.name %><br><br>
-      <strong>Directors: </strong><br>
-        <% @movie.movie_artists.where(role: 'Director').each do |ma| %>
-          <%= ma.artist.name%><br>
-        <% end %><br>
-      <strong>Producers: </strong><br>
-        <% @movie.movie_artists.where(role: 'Producer').take(5).each do |ma| %>
-          <%= ma.artist.name%><br>
-        <% end %><br>
-      <strong>Cast:</strong><br>
-        <% @movie.movie_artists.where(role: 'Cast').take(10).each do |ma| %>
-          <%= ma.artist.name%><br>
-        <% end %>
-    </div></font>
-  </div>
-  <div class="col-md-1">
-  </div>
-  <div class="card" style="width:450px"><font size="2">
-    <div class="container"><br>
-      <strong>Overview:</strong><br>
-        <%= @movie.overview %><br>
+  <div class="col-7">
+    <div class="row">
+      <div class="card" style="width:700px; background-color:rgba(0, 151, 255, 0.3)">
+        <font size="2">
+          <div class="container"><br>
+            <strong>Overview:</strong><br>
+            <%= @movie.overview %><br><br>
+          </div>
+        </div>
+      </font>
+    </div><br>
+    <div class="row">
+      <div class="card" style="width:700px; background-color:rgba(0, 151, 255, 0.3)">
+        <div class="container">
+          <font size="2"><br>
+            <div class="row">
+              <div class="col">
+                <strong>Movie name: </strong><%= @movie.name %><br>
+                <strong>Genre: </strong><%= @movie.genre.name %><br>
+                <strong>Rating: </strong><%= @movie.rating %><br>
+                <strong>Release Date: </strong><%= @movie.release_date %><br>
+                <strong>Movie url: </strong><%= @movie.movie_url %><br><br>
+              </div>
+              <div class="col">
+                <strong>Cast:</strong><br>
+                <% @movie.movie_artists.where(role: 'Cast').take(10).each do |ma| %>
+                  <%= ma.artist.name%><br>
+                <% end %><br>
+              </div>
+              <div class="col">
+                <strong>Directors: </strong><br>
+                <% @movie.movie_artists.where(role: 'Director').each do |ma| %>
+                  <%= ma.artist.name%><br>
+                <% end %><br>
+                <strong>Producers: </strong><br>
+                <% @movie.movie_artists.where(role: 'Producer').take(5).each do |ma| %>
+                  <%= ma.artist.name%><br>
+                <% end %><br>
+              </div>
+            </div>
+          </div>
+        </font>
+      </div>
     </div>
-  </div></font>
+  </div>  
 </div>
-
 <br>
-<%= link_to 'Back', movies_path %> | 
-<%= link_to 'Edit', edit_movie_path(@movie) %> | 
-<%= link_to 'Destroy', @movie, method: :delete, data: { confirm: 'Are you sure?' } %>
+<div class="container">
+  <div class="row"> &nbsp;
+    <%= button_to 'Back', movies_path, :method => :get, :class => "btn-md btn-primary" %> &nbsp; &nbsp; &nbsp;
+    <%= button_to 'Edit', edit_movie_path(@movie), :method => :get, :class => "btn-md btn-info" %> &nbsp; &nbsp; &nbsp;
+    <%= button_to 'Destroy', @movie, method: :delete, :class => "btn-md btn-danger", data: { confirm: 'Are you sure?' } %>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-<h5 class="container" style="background-color: #bce5ff; border:2px solid DarkBlue; color:DarkBlue;"><b>Available Movies</b></h5>
+<h5 class="container" style="background-color: #bce5ff; color:#42698f; opacity:0.7"><b>Available Movies</b></h5>
 <div class="container">
   <div class="row">
     <% @movies.each do |movie| %>
@@ -15,12 +15,14 @@
               <p><strong>Rating: </strong><%= movie.rating %></p>
               <p><strong>Genre: </strong><%= movie.genre.name %></p>
             </font>
-            <br><%= link_to 'Show', movie %>
+            <br><%= button_to 'Show', movie, :method => :get, :class => "btn btn-outline-info btn-sm" %>
           </div>
         </div>
       </div>
     <% end %>
-  </div><br>
-  <%= link_to 'New Movie', new_movie_path %>
-  <%= link_to 'Search Movie using TMDB API', api_search_movies_path %>
+  </div><br><br>
+  <div class="row">
+    <%= button_to 'New Movie', new_movie_path, :method => :get, :class => "btn-md btn-primary" %> &nbsp;
+    <%= button_to 'Search Movie using TMDB API', api_search_movies_path, :method => :get, :class => "btn-md btn-primary" %>
+  </div>
 </div>

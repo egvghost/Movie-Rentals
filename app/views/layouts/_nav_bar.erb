@@ -1,36 +1,36 @@
 <div class="header clearfix">
-  <nav class="navbar navbar-light" style="background-color:#bce5ff; padding:1px">
+  <nav class="navbar fixed-top navbar-light" style="background-color:#42698f; opacity:0.8; padding:1px;">
     <a class="navbar-brand" href="#" style="font-size:14px;">
-      <%= image_tag "movies.png", style:"height:50px; width:50px;" %>
+      &nbsp; <%= image_tag "movies.png", style:"height:50px; width:50px;" %>
       Movie Rental App
     </a>
-    <ul class="nav nav-tabs float-right mb-1">
+    <ul class="nav nav-pills float-right">
       <li class="nav-item">
       <% if @home_selected_in_nav %>
-        <a class="nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+        <a class="btn btn-outline-primary" href="/">Home <span class="sr-only">(current)</span></a>
       <% else %>
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        <a class="btn btn-outline-default" href="/">Home <span class="sr-only">(current)</span></a>
       <% end %>
       </li>
       <li class="nav-item">
       <% if @movies_selected_in_nav %>
-        <a class="nav-link active" href="/movies" role="button">Movies</a>
+        <a class="btn btn-outline-primary" href="/movies" role="button">Movies</a>
       <% else %>
-        <a class="nav-link" href="/movies" role="button">Movies</a>
+        <a class="btn btn-outline-default" href="/movies" role="button">Movies</a>
       <% end %>
       </li>
       <li class="nav-item">
       <% if @genres_selected_in_nav %>
-        <a class="nav-link active" href="/genres" role="button">Genres</a>
+        <a class="btn btn-outline-primary" href="/genres" role="button">Genres</a>
       <% else %>
-        <a class="nav-link" href="/genres" role="button">Genres</a>
+        <a class="btn btn-outline-default" href="/genres" role="button">Genres</a>
       <% end %>
       </li>
       <li class="nav-item">
         <% if @about_selected_in_nav %>
-          <a class="nav-link active" href="/about" role="button">About</a>
+          <a class="btn btn-outline-primary" href="/about" role="button">About</a>
         <% else %>
-          <a class="nav-link" href="/about" role="button">About</a>
+          <a class="btn btn-outline-default" href="/about" role="button">About</a>
         <% end %>
       </li>
     </ul>

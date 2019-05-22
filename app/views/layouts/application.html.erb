@@ -10,11 +10,12 @@
   </head>
 
   <body>
-    <%= render "layouts/nav_bar" %>
     <font style="color:LightBlue;">
-    <%= yield %>
-    </font><br>
-    <%= render "layouts/footer" %>
-    </div> <!-- /container -->
+      <%= render "layouts/nav_bar" %>
+      <br><br><br>
+        <%= yield %>
+      <br>
+      <%= render "layouts/footer" %>
+    </font>
   </body>
 </html>
