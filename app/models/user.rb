@@ -6,4 +6,9 @@ class User < ApplicationRecord
   #'uniqueness: true' evita que haya emails repetidos; 'presence: true' impide que se generen usuarios sin email
   validates :password, presence: true, length: { minimum: 8 }
   has_secure_password
+
+  def is_admin?
+    self.admin
+  end
+
  end

@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show]
-
+  skip_before_action :logged_in_user, only: [:new, :create]
+  
   def show
   end
 

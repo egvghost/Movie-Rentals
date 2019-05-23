@@ -4,35 +4,48 @@
       &nbsp; <%= image_tag "movies.png", style:"height:50px; width:50px;" %>
       Movie Rental App
     </a>
-    <ul class="nav nav-pills float-right">
-      <li class="nav-item">
-      <% if @home_selected_in_nav %>
-        <a class="btn btn-outline-primary" href="/">Home <span class="sr-only">(current)</span></a>
-      <% else %>
-        <a class="btn btn-outline-default" href="/">Home <span class="sr-only">(current)</span></a>
-      <% end %>
-      </li>
-      <li class="nav-item">
-      <% if @movies_selected_in_nav %>
-        <a class="btn btn-outline-primary" href="/movies" role="button">Movies</a>
-      <% else %>
-        <a class="btn btn-outline-default" href="/movies" role="button">Movies</a>
-      <% end %>
-      </li>
-      <li class="nav-item">
-      <% if @genres_selected_in_nav %>
-        <a class="btn btn-outline-primary" href="/genres" role="button">Genres</a>
-      <% else %>
-        <a class="btn btn-outline-default" href="/genres" role="button">Genres</a>
-      <% end %>
-      </li>
-      <li class="nav-item">
-        <% if @about_selected_in_nav %>
-          <a class="btn btn-outline-primary" href="/about" role="button">About</a>
+    <% if logged_in? %>
+      <ul class="nav nav-pills float-right">
+        <li class="nav-item">
+        <% if @home_selected_in_nav %>
+          <a class="btn btn-outline-primary" href="/">Home <span class="sr-only">(current)</span></a>
         <% else %>
-          <a class="btn btn-outline-default" href="/about" role="button">About</a>
+          <a class="btn btn-outline-default" href="/">Home <span class="sr-only">(current)</span></a>
         <% end %>
-      </li>
-    </ul>
+        </li>
+        <li class="nav-item">
+        <% if @movies_selected_in_nav %>
+          <a class="btn btn-outline-primary" href="/movies" role="button">Movies</a>
+        <% else %>
+          <a class="btn btn-outline-default" href="/movies" role="button">Movies</a>
+        <% end %>
+        </li>
+        <li class="nav-item">
+        <% if @genres_selected_in_nav %>
+          <a class="btn btn-outline-primary" href="/genres" role="button">Genres</a>
+        <% else %>
+          <a class="btn btn-outline-default" href="/genres" role="button">Genres</a>
+        <% end %>
+        </li>
+        <li class="nav-item">
+          <% if @about_selected_in_nav %>
+            <a class="btn btn-outline-primary" href="/about" role="button">About</a>
+          <% else %>
+            <a class="btn btn-outline-default" href="/about" role="button">About</a>
+          <% end %>
+        </li>
+      </ul>
+      <div class="py-2 d-none d-md-inline-block ui pointing dropdown link item">
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+            <%=icon 'fa fas fa-user-circle', class: 'dropdown icon'%> 
+            <%=current_user.name%>
+          </button>
+          <div class="dropdown-menu">
+            <%= link_to 'Logout', logout_path, method: :delete, class: 'dropdown-item' %>
+          </div>
+        </div>
+      </div>  
+    <% end %>
   </nav>
 </div>

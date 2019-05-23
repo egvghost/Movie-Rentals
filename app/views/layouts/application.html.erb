@@ -13,6 +13,9 @@
     <font style="color:LightBlue;">
       <%= render "layouts/nav_bar" %>
       <br><br><br>
+        <% flash.each do |message_type, message| %>
+          <%= content_tag :div, message, class: "alert alert-#{message_type}" %>
+        <% end %>
         <%= yield %>
       <br>
       <%= render "layouts/footer" %>
