@@ -1,18 +1,11 @@
 class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
-  before_action :verify_if_admin_and_redirect_with_error_message_if_not, only [:new, :edit, :create, :update, :destroy, :import, :api_search_results, :api_search]
+  before_action :verify_if_admin_and_redirect_with_error_message_if_not, only: [:new, :edit, :create, :update, :destroy, :import, :api_search_results, :api_search]
 
   # GET /movies
   # GET /movies.json
   def index
     @movies = Movie.all
-  end
-
-  def verify_if_admin_and_redirect_with_error_message_if_not
-    unless current_user.is_admin?
-      flash[:danger] = "You are not authorized to perform this action"
-      redirect_to_movies_url
-    end
   end
 
   def api_search
@@ -106,4 +99,12 @@ class MoviesController < ApplicationController
       params.require(:movie).permit(:name, :movie_url, :release_date, :rating, :cover_url, :genre_id)
       #whitelist creada para permitir SÓLO los parámetros listados, durante el POST del form
     end
+
+    def verify_if_admin_and_redirect_with_error_message_if_not
+      unless current_user.is_admin?
+        flash[:danger] = "You are not authorized to perform this action"
+        redirect_to_movies_url
+      end
+    end
+    
 end
