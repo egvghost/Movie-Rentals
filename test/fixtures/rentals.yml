@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  valid_from: 2019-05-28 14:54:25
+  valid_to: 2019-05-28 14:54:25
+  user: one
+  movie: one
+
+two:
+  valid_from: 2019-05-28 14:54:25
+  valid_to: 2019-05-28 14:54:25
+  user: two
+  movie: two

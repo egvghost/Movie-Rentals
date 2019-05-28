@@ -3,6 +3,8 @@ class Movie < ApplicationRecord
   has_many :movie_artists, dependent: :destroy
   has_many :artists, through: :movie_artists
   validates :name, uniqueness: { scope: :release_date,  message: "Movie already exists" }
+  has_many :rentals
+  has_many :users, through: :rentals
 
   def self.import_movie_from_tmdb(tmdb_id)
     tmdb_movie = Tmdb::Movie.detail(tmdb_id)
