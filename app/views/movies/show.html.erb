@@ -55,7 +55,9 @@
 <div class="container">
   <div class="row"> &nbsp;
     <%= button_to 'Back', movies_path, :method => :get, :class => "btn-md btn-primary" %> &nbsp; &nbsp; &nbsp;
-    <%= button_to 'Edit', edit_movie_path(@movie), :method => :get, :class => "btn-md btn-info" %> &nbsp; &nbsp; &nbsp;
-    <%= button_to 'Destroy', @movie, method: :delete, :class => "btn-md btn-danger", data: { confirm: 'Are you sure?' } %>
+    <% if current_user.is_admin? %>
+      <%= button_to 'Edit', edit_movie_path(@movie), :method => :get, :class => "btn-md btn-info" %> &nbsp; &nbsp; &nbsp;
+      <%= button_to 'Destroy', @movie, method: :delete, :class => "btn-md btn-danger", data: { confirm: 'Are you sure?' } %>
+    <% end %>
   </div>
 </div>
