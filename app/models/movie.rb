@@ -1,6 +1,6 @@
 class Movie < ApplicationRecord
   belongs_to :genre
-  has_many :movie_artists
+  has_many :movie_artists, dependent: :destroy
   has_many :artists, through: :movie_artists
   validates :name, uniqueness: { scope: :release_date,  message: "Movie already exists" }
 
