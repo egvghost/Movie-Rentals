@@ -24,6 +24,18 @@ class Movie < ApplicationRecord
     self.import_cast_from_tmdb movie_credits, movie
     movie
   end
+
+  def directors 
+    self.movie_artists.where(role: "Director")
+  end
+
+  def cast
+    self.movie_artists.where(role: "Cast")
+  end
+
+  def producers 
+    self.movie_artists.where(role: "Producer")
+  end
   
 
   private

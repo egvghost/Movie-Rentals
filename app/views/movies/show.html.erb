@@ -30,17 +30,17 @@
               </div>
               <div class="col">
                 <strong>Cast:</strong><br>
-                <% @movie.movie_artists.where(role: 'Cast').take(10).each do |ma| %>
+                <% @movie.cast.take(10).each do |ma| %>
                   <%= ma.artist.name%><br>
                 <% end %><br>
               </div>
               <div class="col">
                 <strong>Directors: </strong><br>
-                <% @movie.movie_artists.where(role: 'Director').each do |ma| %>
+                <% @movie.directors.each do |ma| %>
                   <%= ma.artist.name%><br>
                 <% end %><br>
                 <strong>Producers: </strong><br>
-                <% @movie.movie_artists.where(role: 'Producer').take(5).each do |ma| %>
+                <% @movie.producers.take(5).each do |ma| %>
                   <%= ma.artist.name%><br>
                 <% end %><br>
               </div>
