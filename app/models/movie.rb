@@ -40,37 +40,27 @@ class Movie < ApplicationRecord
 
   private
 
-  def self.import_directors_from_tmdb(credits, m)
-    crew = {}
-    #byebug
-    for i in 0..credits["crew"].size-1
-      if credits["crew"][i]["job"] == "Director" then 
-        crew[i] = credits["crew"][i]["name"] 
-        director = credits["crew"].find{|c| c["job"] == "Director"}.select{|k,v| k == "name"}   
-        artist = Artist.find_or_create_by(name: crew[i])
-        MovieArtist.find_or_create_by(role: "Director",movie: m, artist: artist) 
-      end
+  def self.import_directors_from_tmdb(movie_credits, movie)
+    directors = movie_credits["crew"].select{|c| c["job"] == "Director"} 
+    directors.each do |d|
+      artist = Artist.find_or_create_by(name: d["name"])
+      MovieArtist.find_or_create_by(role: "Director",movie: movie, artist: artist)
     end
   end
 
-  def self.import_producers_from_tmdb(credits, m)
-    crew = {}
-    #byebug
-    for i in 0..credits["crew"].size-1
-      if credits["crew"][i]["job"] == "Producer" then 
-        crew[i] = credits["crew"][i]["name"] 
-        artist = Artist.find_or_create_by(name: crew[i])
-        MovieArtist.find_or_create_by(role: "Producer",movie: m, artist: artist)  
-      end
+  def self.import_producers_from_tmdb(movie_credits, movie)
+    producers = movie_credits["crew"].select{|c| c["job"] == "Producer" || c["job"] == "Executive Producer"}
+    producers.each do |p|
+      artist = Artist.find_or_create_by(name: p["name"])
+      MovieArtist.find_or_create_by(role: "Producer",movie: movie, artist: artist)
     end 
   end
 
-  def self.import_cast_from_tmdb(credits, m)
-    cast = {}
-    for i in 0..credits["cast"].size-1
-      cast[credits["cast"][i]["character"]] = credits["cast"][i]["name"]    
-      artist = Artist.find_or_create_by(name: credits["cast"][i]["name"])
-      MovieArtist.find_or_create_by(role: "Cast",movie: m, artist: artist)   
+  def self.import_cast_from_tmdb(movie_credits, movie)
+    cast = movie_credits["cast"]
+    cast.each do |c|
+      artist = Artist.find_or_create_by(name: c["name"])
+      MovieArtist.find_or_create_by(role: "Cast",movie: movie, artist: artist)   
     end
   end
 
