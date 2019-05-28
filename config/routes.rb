@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  #get 'rentals/index'
+  #get 'rentals/show'
+  #get 'rentals/new'
+  #get 'rentals/create'
+  resources :rentals, only: [:index, :show, :new, :create]
   resources :movies do
     get 'api_search', on: :collection
     get 'api_search_results', on: :collection
