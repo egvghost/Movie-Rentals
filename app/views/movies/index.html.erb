@@ -15,7 +15,7 @@
               <p><strong>Rating: </strong><%= movie.rating %></p>
               <p><strong>Genre: </strong><%= movie.genre.name %></p>
             </font>
-            <br><%= button_to 'Show', movie, :method => :get, :class => "btn btn-outline-info btn-sm" %>
+            <br><%= link_to 'Show', movie, :class => "btn btn-sm btn-outline-info" %>
           </div>
         </div>
       </div>
@@ -23,8 +23,8 @@
   </div><br><br>
   <% if current_user.is_admin? %>
     <div class="row">
-      <%= button_to 'New Movie', new_movie_path, :method => :get, :class => "btn-md btn-primary" %> &nbsp;
-      <%= button_to 'Search Movie using TMDB API', api_search_movies_path, :method => :get, :class => "btn-md btn-primary" %>
+      <%= link_to 'New Movie', new_movie_path, :class => "btn btn-sm btn-success" %> &nbsp;
+      <%= link_to 'Search Movie using TMDB API', api_search_movies_path, :class => "btn btn-sm btn-primary" %>
     </div>
   <% end %>
 </div>

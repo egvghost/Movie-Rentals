@@ -1,13 +1,20 @@
 <h1>New Rentals</h1>
 <br>
-<p>You are renting: <%= @movie.name %></p>
-<p>From: <%= @rental.valid_from %></p>
-<p>Until: <%= @rental.valid_to %></p>
+<% if !current_user.rentals.find_by(movie_id: @movie.id) || !current_user.rentals.find_by(movie_id: @movie.id).currently_rented? %>
+  <p>You are renting: <b><%= @movie.name %></b></p>
+  <p>From: <%= @rental.valid_from %></p>
+  <p>Until: <%= @rental.valid_to %></p>
 
-<p>Note: 2 days rental period will start once you confirm this operation.</p>
+  <p>Note: 2 days rental period will start once you confirm this operation.</p>
 
-<%= form_for @rental, utl: {action: "create"} do |f| %>
-  <%= hidden_field_tag(:movie_id, @movie.id) %>
-  <%= f.submit "Confirm", class: 'btn-md btn-primary' %>
-  <%= button_to "Back", movies_path, class: 'btn-md btn-secondary'%>
+  <%= form_for @rental, utl: {action: "create"} do |f| %>
+    <%= hidden_field_tag(:movie_id, @movie.id) %>
+    <%= f.submit "Confirm", class: 'btn btn-sm btn-primary' %>
+  <% end %>
+<% else %>
+  <p>You have an active rent for <b><%= @movie.name %></b></p>
+  <p>From: <%= current_user.rentals.find_by(movie_id: @movie.id).valid_from %></p>
+  <p>Until: <%= current_user.rentals.find_by(movie_id: @movie.id).valid_to %></p>
 <% end %>
+<br>
+<%= link_to "Back", movie_path(@movie), class: 'btn btn-sm btn-secondary'%>

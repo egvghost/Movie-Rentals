@@ -1,2 +1,24 @@
-<h1>Rentals#index</h1>
-<p>Find me in app/views/rentals/index.html.erb</p>
+<h1>My Rentals</h1>
+
+<div class="container">
+  <table class="table table-striped table-hover">
+    <thead style="background-color:rgba(0, 151, 255, 0.5)">
+      <tr>
+        <th>Movie</th>
+        <th>Rented from</th>
+        <th>Rented until</th>
+        <th>Active?</th>
+      </tr>
+    </thead>
+    <tbody style="background-color:rgba(0, 181, 255, 0.3)">
+      <% current_user.rentals.sort_by {|item| item.id}.reverse.each do |r| %>
+        <tr>
+          <td><%= r.movie.name %></td>
+          <td><%= r.valid_from %></td>
+          <td><%= r.valid_to %></td>
+          <td><%= r.currently_rented? %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
