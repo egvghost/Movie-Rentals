@@ -1,5 +1,10 @@
 <p id="notice"><%= notice %></p>
-<h5 class="container" style="background-color: #bce5ff; color:#42698f; opacity:0.7"><b>Available Movies</b></h5>
+<div class="container" style="background-color: #bce5ff; color:#42698f; opacity:0.7">
+<div class="row"><div class="col" style="text-align:right"><h5><b>Available Movies</b></h5></div>
+<div class="col" style="text-align:right"><%= form_with(url: movies_url, method: "get") do %>
+  <%= text_field_tag(:q) %>
+  <%= submit_tag("Search") %></div></div></div>
+<% end %>
 <div class="container">
   <div class="row">
     <% @movies.each do |movie| %>
