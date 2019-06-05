@@ -1,6 +1,10 @@
 <h1>New Rentals</h1>
 <br>
-<% if !current_user.rentals.find_by(movie_id: @movie.id) || !current_user.rentals.find_by(movie_id: @movie.id).currently_rented? %>
+<% if current_user.rentals.find_by(movie_id: @movie.id).currently_rented? %>
+  <p>You have an active rent for <b><%= @movie.name %></b></p>
+  <p>From: <%= current_user.rentals.active.find_by(movie_id: @movie.id).valid_from %></p>
+  <p>Until: <%= current_user.rentals.active.find_by(movie_id: @movie.id).valid_to %></p>
+<% else %>
   <p>You are renting: <b><%= @movie.name %></b></p>
   <p>From: <%= @rental.valid_from %></p>
   <p>Until: <%= @rental.valid_to %></p>
@@ -9,12 +13,9 @@
 
   <%= form_for @rental, utl: {action: "create"} do |f| %>
     <%= hidden_field_tag(:movie_id, @movie.id) %>
-    <%= f.submit "Confirm", class: 'btn btn-sm btn-primary' %>
+    <%= f.submit "Confirm", class: 'btn btn-sm btn-success' %>
   <% end %>
-<% else %>
-  <p>You have an active rent for <b><%= @movie.name %></b></p>
-  <p>From: <%= current_user.rentals.find_by(movie_id: @movie.id).valid_from %></p>
-  <p>Until: <%= current_user.rentals.find_by(movie_id: @movie.id).valid_to %></p>
 <% end %>
 <br>
-<%= link_to "Back", movie_path(@movie), class: 'btn btn-sm btn-secondary'%>
+<%= link_to "Movies", movies_path, class: 'btn btn-sm btn-secondary'%>
+<%= link_to "My Rentals", rentals_path, class: 'btn btn-sm btn-primary'%>
