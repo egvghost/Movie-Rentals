@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h5 class="container" style="background-color: #bce5ff; color:#42698f; opacity:0.7"><b>Available Movies under "<%= @genre.name %>" genre</b></h5>
+<h5 class="container" style="background-color: #bce5ff; color:#42698f; opacity:0.7; text-align:center"><b>Available "<%= @genre.name %>" Movies</b></h5>
 <div class="container">
   <div class="row">
     <% @genre.movies.each do |movie| %>
@@ -22,7 +22,7 @@
       </div>
     <% end %>
   </div><br><br>
-  <%= link_to 'Back', genres_path, :class => "btn btn-sm btn-secondary" %>
+  <%= link_to 'Back to Genres', genres_path, :class => "btn btn-sm btn-secondary" %>
   <% if current_user.is_admin? %>
     <%= link_to 'Edit', edit_genre_path(@genre), :class => "btn btn-sm btn-info" %>
   <% end %>
