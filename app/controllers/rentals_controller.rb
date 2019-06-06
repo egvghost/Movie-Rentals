@@ -19,7 +19,7 @@ class RentalsController < ApplicationController
     @rental.user = current_user
 
     if @rental.save
-      redirect_to @rental, notice: "You have successfully rented #{@movie.name}"
+      redirect_to rentals_path, notice: "You have successfully rented #{@movie.name}"
     else
       redirect_to movies_path, notice: "There was an error performing the operation. #{@rental.errors.first.last}"
     end

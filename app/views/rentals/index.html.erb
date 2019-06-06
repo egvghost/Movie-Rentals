@@ -3,8 +3,8 @@
   <thead style="background-color:rgba(0, 151, 255, 0.5)">
     <tr>
       <th style="width:35%;">Movie</th>
-      <th style="width:35%;">Rental valid until</th>
-      <th style="width:20%; text-align: center">View Movie</th>
+      <th style="width:30%;">Rental valid until</th>
+      <th style="width:25%; text-align: center">View Movie</th>
       <th style="width:10%; text-align: center">Active?</th>
     </tr>
   </thead>
@@ -26,21 +26,23 @@
   <thead style="background-color:rgba(0, 151, 255, 0.5)">
     <tr>
       <th style="width:35%;">Movie</th>
-      <th style="width:35%;">Rental expired on</th>
-      <th style="width:20%; text-align: center">View Movie</th>
+      <th style="width:30%;">Rental expired on</th>
+      <th style="width:25%; text-align: center">View Movie</th>
       <th style="width:10%; text-align: center">#Rents</th>
     </tr>
   </thead>
   <tbody style="background-color:rgba(0, 181, 255, 0.3)">
     <% current_user.rentals.inactive.sort_by {|item| item.id}.reverse.each do |r| %>
-      <tr>
-        <td><%= r.movie.name %></td>
-        <td><%= r.valid_to %></td>
-        <td style="text-align: center">
-          <%= link_to 'Rent', new_rental_path(movie_id: r.movie.id), class: 'btn btn-sm btn-primary' %>
-        <%= link_to 'Details', r.movie, :class => "btn btn-sm btn-info" %></td>
-        <td style="text-align: center"><%= current_user.rentals.where(movie: r.movie).count %></td>
-      </tr>
+      <% if !r.currently_rented? %>
+        <tr>
+          <td><%= r.movie.name %></td>
+          <td><%= r.valid_to %></td>
+          <td style="text-align: center">
+            <%= link_to 'Rent again', new_rental_path(movie_id: r.movie.id), class: 'btn btn-sm btn-primary' %>
+          <%= link_to 'Details', r.movie, :class => "btn btn-sm btn-info" %></td>
+          <td style="text-align: center"><%= current_user.rentals.where(movie: r.movie).count %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

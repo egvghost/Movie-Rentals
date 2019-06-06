@@ -5,7 +5,11 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.json
   def index
-    @movies = Movie.all
+    @movies = if params[:q]
+      Movie.where('name LIKE ?', "%#{params[:q]}%")
+    else
+      @movies = Movie.all
+    end
   end
 
   def api_search

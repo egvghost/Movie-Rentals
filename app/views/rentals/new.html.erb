@@ -1,6 +1,6 @@
 <h1>New Rentals</h1>
 <br>
-<% if current_user.rentals.find_by(movie_id: @movie.id).currently_rented? %>
+<% if current_user.rentals.active.where(movie_id: @movie.id).exists? %>
   <p>You have an active rent for <b><%= @movie.name %></b></p>
   <p>From: <%= current_user.rentals.active.find_by(movie_id: @movie.id).valid_from %></p>
   <p>Until: <%= current_user.rentals.active.find_by(movie_id: @movie.id).valid_to %></p>
