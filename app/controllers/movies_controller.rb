@@ -1,14 +1,15 @@
 class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
   before_action :verify_if_admin_and_redirect_with_error_message_if_not, only: [:new, :edit, :create, :update, :destroy, :import, :api_search_results, :api_search]
+  before_action :verify_user_age
 
   # GET /movies
   # GET /movies.json
   def index
     @movies = if params[:q]
-      Movie.where('name LIKE ?', "%#{params[:q]}%")
+      @permited_movies.where('name LIKE ?', "%#{params[:q]}%")
     else
-      @movies = Movie.all
+      @movies = @permited_movies
     end
   end
 
@@ -110,5 +111,15 @@ class MoviesController < ApplicationController
         redirect_to movies_url
       end
     end
+
+    def verify_user_age
+      @age = ((Time.zone.now - current_user.birthdate.to_time) / 1.year.seconds).floor
+      @permited_movies = case 
+        when @age < 13 then Movie.where(rating: ["", "G", "PG"])
+        when @age < 17 then Movie.where(rating: ["", "G", "PG", "PG-13"])
+        else Movie.all
+      end
+    end
+    
     
 end
