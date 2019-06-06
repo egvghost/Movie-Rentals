@@ -8,7 +8,7 @@
       <th style="width:10%; text-align: center">Active?</th>
     </tr>
   </thead>
-  <tbody style="background-color:rgba(0, 181, 255, 0.3)">
+  <tbody style="background-color:rgba(0, 181, 255, 0.5)">
     <% current_user.rentals.active.sort_by {|item| item.id}.reverse.each do |r| %>
       <tr>
         <td><%= r.movie.name %></td>
@@ -31,7 +31,7 @@
       <th style="width:10%; text-align: center">#Rents</th>
     </tr>
   </thead>
-  <tbody style="background-color:rgba(0, 181, 255, 0.3)">
+  <tbody style="background-color:rgba(0, 181, 255, 0.5)">
     <% current_user.rentals.inactive.sort_by {|item| item.id}.reverse.each do |r| %>
       <% if !r.currently_rented? %>
         <tr>
