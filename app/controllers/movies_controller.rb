@@ -1,8 +1,7 @@
 class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
   before_action :verify_if_admin_and_redirect_with_error_message_if_not, only: [:new, :edit, :create, :update, :destroy, :import, :api_search_results, :api_search]
-  before_action :verify_user_age
-
+  
   # GET /movies
   # GET /movies.json
   def index
