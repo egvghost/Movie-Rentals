@@ -5,12 +5,17 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with:   VALID_EMAIL_REGEX }
   #'uniqueness: true' evita que haya emails repetidos; 'presence: true' impide que se generen usuarios sin email
   validates :password, presence: true, length: { minimum: 8 }
+  validates :birthdate, presence: true
   has_secure_password
   has_many :rentals
   has_many :movies, through: :rentals
 
   def is_admin?
     self.admin
+  end
+  
+  def age
+    ((Time.zone.now - birthdate.to_time) / 1.year.seconds).floor
   end
 
  end

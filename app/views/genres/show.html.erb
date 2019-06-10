@@ -3,7 +3,7 @@
 <h5 class="container" style="background-color: #bce5ff; color:#42698f; opacity:0.7; text-align:center"><b>Available "<%= @genre.name %>" Movies</b></h5>
 <div class="container">
   <div class="row">
-    <% @genre.movies.each do |movie| %>
+    <% @genre.movies.permited(current_user.age).each do |movie| %>
       <div class="flip-card">
         <div class="flip-card-inner">
           <div class="flip-card-front">

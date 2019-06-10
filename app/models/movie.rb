@@ -6,6 +6,15 @@ class Movie < ApplicationRecord
   has_many :rentals
   has_many :users, through: :rentals
 
+  def self.permited (user_age)
+    permited_ratings = case 
+      when user_age < 13 then ["", "G", "PG"]
+      when user_age < 17 then ["", "G", "PG", "PG-13"]
+      else []
+    end
+    Movie.where(rating: permited_ratings)
+  end
+
   def self.import_movie_from_tmdb(tmdb_id)
     tmdb_movie = Tmdb::Movie.detail(tmdb_id)
     tmdb_movie_genre = tmdb_movie["genres"].first["name"]

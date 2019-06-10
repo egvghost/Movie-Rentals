@@ -6,6 +6,7 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.json
   def index
+    @permited_movies = Movie.permited(current_user.age)
     @movies = if params[:q]
       @permited_movies.where('name LIKE ?', "%#{params[:q]}%")
     else
@@ -111,15 +112,5 @@ class MoviesController < ApplicationController
         redirect_to movies_url
       end
     end
-
-    def verify_user_age
-      @age = ((Time.zone.now - current_user.birthdate.to_time) / 1.year.seconds).floor
-      @permited_movies = case 
-        when @age < 13 then Movie.where(rating: ["", "G", "PG"])
-        when @age < 17 then Movie.where(rating: ["", "G", "PG", "PG-13"])
-        else Movie.all
-      end
-    end
-    
     
 end
