@@ -96,7 +96,12 @@ class MoviesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_movie
-      @movie = Movie.find(params[:id])
+      begin 
+        @movie = Movie.permited(current_user.age).find(params[:id])
+      rescue 
+        flash[:danger] = "You are not authorized to perform this action"
+        redirect_to movies_url
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
