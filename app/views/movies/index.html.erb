@@ -42,4 +42,5 @@
       <%= link_to 'Search Movie using TMDB API', api_search_movies_path, :class => "btn btn-sm btn-primary" %>
     </div>
   <% end %>
+  <%= paginate @movies %>
 </div>

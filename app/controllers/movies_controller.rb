@@ -5,7 +5,7 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.json
   def index
-    @permited_movies = Movie.permited(current_user.age)
+    @permited_movies = Movie.permited(current_user.age).order(:name).page params[:page]
     @movies = if params[:q]
       @permited_movies.where('name LIKE ?', "%#{params[:q]}%")
     else

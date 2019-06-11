@@ -5,6 +5,7 @@ class Movie < ApplicationRecord
   validates :name, uniqueness: { scope: :release_date,  message: "Movie already exists" }
   has_many :rentals
   has_many :users, through: :rentals
+  paginates_per 28
 
   def self.permited (user_age)
     movies = case 
