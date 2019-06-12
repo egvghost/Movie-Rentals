@@ -53,13 +53,18 @@
 </div>
 <br>
 <div class="container">
-  <div class="row"> &nbsp;
-    <%= link_to 'Back', movies_path, :class => "btn btn-sm btn-secondary" %> &nbsp; &nbsp; &nbsp;
+  <div class="row">
+    <%= link_to 'Back', movies_path, :class => "btn btn-sm btn-secondary" %> &nbsp; &nbsp; &nbsp; &nbsp;
     <% if current_user.is_admin? %>
-      <%= link_to 'Edit', edit_movie_path(@movie), :class => "btn btn-sm btn-info" %> &nbsp; &nbsp; &nbsp;
-      <%= link_to 'Destroy', @movie, method: :delete, :class => "btn btn-sm btn-danger", data: { confirm: 'Are you sure?' } %>
+      <%= link_to 'Edit', edit_movie_path(@movie), :class => "btn btn-sm btn-info" %> &nbsp; &nbsp;
+      <%= link_to 'Destroy', @movie, method: :delete, :class => "btn btn-sm btn-danger", data: { confirm: 'This movie will be deleted. Are you sure?' } %> &nbsp; &nbsp;
     <% else %>
-      <%= link_to 'Rent', new_rental_path(movie_id: @movie.id), class: 'btn btn-sm btn-primary' %>
+      <%= link_to 'Rent', new_rental_path(movie_id: @movie.id), class: 'btn btn-sm btn-primary' %> &nbsp; &nbsp;
+    <% end %>
+    <% if @movie.active? %>
+      <font color="green">Active</font>
+    <% else %>
+      <font color="red">Inactive</font>
     <% end %>
   </div>
 </div>

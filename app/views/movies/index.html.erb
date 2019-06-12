@@ -36,11 +36,14 @@
       </div>
     <% end %>
   </div><br><br>
-  <% if current_user.is_admin? %>
-    <div class="row">
-      <%= link_to 'New Movie', new_movie_path, :class => "btn btn-sm btn-success" %> &nbsp;
-      <%= link_to 'Search Movie using TMDB API', api_search_movies_path, :class => "btn btn-sm btn-primary" %>
-    </div>
-  <% end %>
-  <%= paginate @movies %>
+  <div class="row">
+    <div class="col">
+    <% if current_user.is_admin? %>
+      <div class="row">
+        <%= link_to 'New Movie', new_movie_path, :class => "btn btn-sm btn-success" %> &nbsp;
+        <%= link_to 'Search Movie using TMDB API', api_search_movies_path, :class => "btn btn-sm btn-primary" %>
+      </div>
+    <% end %></div>
+    <div class="col"><%= paginate @movies %></div>
+  </div>
 </div>

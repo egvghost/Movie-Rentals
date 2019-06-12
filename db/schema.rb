@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_28_175424) do
+ActiveRecord::Schema.define(version: 2019_06_11_183641) do
 
   create_table "artists", force: :cascade do |t|
     t.string "name"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 2019_05_28_175424) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "overview"
+    t.boolean "active"
     t.index ["genre_id"], name: "index_movies_on_genre_id"
     t.index ["name", "release_date"], name: "index_movies_on_name_and_release_date", unique: true
   end

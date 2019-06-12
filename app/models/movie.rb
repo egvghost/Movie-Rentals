@@ -7,6 +7,10 @@ class Movie < ApplicationRecord
   has_many :users, through: :rentals
   paginates_per 28
 
+  def is_active?
+    self.active
+  end
+
   def self.permited (user_age)
     movies = case 
       when user_age < 13 then Movie.where(rating: ["", "G", "PG"])

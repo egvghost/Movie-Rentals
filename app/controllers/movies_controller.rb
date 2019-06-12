@@ -6,6 +6,7 @@ class MoviesController < ApplicationController
   # GET /movies.json
   def index
     @permited_movies = Movie.permited(current_user.age).order(:name).page params[:page]
+    @permited_movies = @permited_movies.where(active: true) unless current_user.is_admin?
     @movies = if params[:q]
       @permited_movies.where('name LIKE ?', "%#{params[:q]}%")
     else
@@ -98,15 +99,19 @@ class MoviesController < ApplicationController
     def set_movie
       begin 
         @movie = Movie.permited(current_user.age).find(params[:id])
+        (if !@movie.is_active? 
+          flash[:danger] = "The movie you are trying to access is not available"
+          redirect_to movies_url
+        end) unless current_user.is_admin?
       rescue 
-        flash[:danger] = "You are not authorized to perform this action"
+        flash[:danger] = "You are not authorized to access this movie"
         redirect_to movies_url
       end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def movie_params
-      params.require(:movie).permit(:name, :movie_url, :release_date, :rating, :cover_url, :genre_id)
+      params.require(:movie).permit(:name, :movie_url, :release_date, :rating, :cover_url, :genre_id, :active)
       #whitelist creada para permitir SÓLO los parámetros listados, durante el POST del form
     end
 
